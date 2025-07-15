@@ -3,9 +3,8 @@ import Image from "next/image";
 
 interface PaperCardProps {
   title: string;
-  authors: string;
+  teamMembers: string;
   year: string;
-  conference: string;
   category: string;
   imageUrl?: string;
   href: string;
@@ -14,9 +13,8 @@ interface PaperCardProps {
 
 export default function PaperCard({
   title,
-  authors,
+  teamMembers,
   year,
-  conference,
   category,
   imageUrl,
   href,
@@ -51,22 +49,16 @@ export default function PaperCard({
             {title}
           </h3>
 
-          {/* 作者信息 */}
+          {/* 团队成员信息 */}
           <div className="text-sm text-gray-600 mb-2">
-            <span className="font-medium">作者：</span>
-            {authors}
+            <span className="font-medium">团队成员：</span>
+            {teamMembers}
           </div>
 
-          {/* 会议和年份 */}
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-            <span>
-              <span className="font-medium">时间：</span>
-              {year}
-            </span>
-            <span>
-              <span className="font-medium">会议：</span>
-              {conference}
-            </span>
+          {/* 年份 */}
+          <div className="text-sm text-gray-500 mb-3">
+            <span className="font-medium">时间：</span>
+            {year}
           </div>
 
           {/* 描述 */}
