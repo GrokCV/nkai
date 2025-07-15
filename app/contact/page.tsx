@@ -127,83 +127,14 @@ export default function ContactPage() {
 
             {/* 联系表单 */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                发送消息
-              </h2>
-              <form className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    姓名
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="请输入您的姓名"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    邮箱
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="请输入您的邮箱"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    主题
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="请输入消息主题"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    消息
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="请输入您的消息内容"
-                  />
-                </div>
-
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    发送消息
-                  </button>
-                </div>
-              </form>
+              <iframe
+                className="airtable-embed"
+                src="https://airtable.com/embed/appG1FpDqPz5lCueW/pagxOwb1MM8JyP6iK/form"
+                frameBorder="0"
+                width="100%"
+                height="600"
+                style={{ background: "transparent", border: "1px solid #ccc" }}
+              ></iframe>
             </div>
           </div>
         </div>

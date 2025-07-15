@@ -1,16 +1,50 @@
+// 竞赛分类
+export const categories = [
+  "算法竞赛",
+  "数据竞赛",
+  "创新竞赛",
+  "学术竞赛",
+  "产业竞赛",
+  "国际竞赛",
+  "学生竞赛",
+  "编程竞赛",
+];
+
+// 根据截止时间自动计算竞赛状态
+export function getCompetitionStatus(
+  deadline: string
+): "upcoming" | "ongoing" | "closed" {
+  const now = new Date();
+  const deadlineDate = new Date(deadline);
+  const timeDiff = deadlineDate.getTime() - now.getTime();
+  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  if (daysDiff < 0) {
+    return "closed";
+  } else if (daysDiff <= 30) {
+    return "ongoing";
+  } else {
+    return "upcoming";
+  }
+}
+
 // 共享的竞赛数据
 export interface Competition {
   title: string;
   description: string;
-  category: string;
+  category: (typeof categories)[number];
   deadline: string;
   prize: string;
   organizer: string;
   registrationUrl: string;
-  status: "upcoming" | "ongoing" | "closed";
   websiteUrl: string;
   participants: string;
   featured: boolean; // 是否在首页展示
+}
+
+// 扩展的竞赛接口，包含自动计算的状态
+export interface CompetitionWithStatus extends Competition {
+  status: "upcoming" | "ongoing" | "closed";
 }
 
 export const competitions: Competition[] = [
@@ -23,7 +57,6 @@ export const competitions: Competition[] = [
     prize: "总奖金 $100,000",
     organizer: "Kaggle",
     registrationUrl: "https://kaggle.com/competitions",
-    status: "upcoming",
     websiteUrl: "https://kaggle.com/competitions",
     participants: "预计10000+",
     featured: true,
@@ -37,7 +70,6 @@ export const competitions: Competition[] = [
     prize: "世界冠军奖杯",
     organizer: "ICPC Foundation",
     registrationUrl: "https://icpc.global/regionals",
-    status: "ongoing",
     websiteUrl: "https://icpc.global",
     participants: "50000+",
     featured: true,
@@ -51,7 +83,6 @@ export const competitions: Competition[] = [
     prize: "一等奖 1万元",
     organizer: "全国大学生数学建模竞赛组委会",
     registrationUrl: "https://mcm.edu.cn/html_cn/node/node_576.html",
-    status: "upcoming",
     websiteUrl: "https://mcm.edu.cn",
     participants: "预计40000+",
     featured: true,
@@ -65,7 +96,6 @@ export const competitions: Competition[] = [
     prize: "冠军 10万元",
     organizer: "阿里云天池",
     registrationUrl: "https://tianchi.aliyun.com/competition/example",
-    status: "ongoing",
     websiteUrl: "https://tianchi.aliyun.com/competition/example",
     participants: "1200+",
     featured: false,
@@ -79,7 +109,6 @@ export const competitions: Competition[] = [
     prize: "$8,000 USD",
     organizer: "IEEE ICIP",
     registrationUrl: "https://example.com/register/icip2025",
-    status: "upcoming",
     websiteUrl: "https://example.com/icip2025-sr",
     participants: "预计300+",
     featured: false,
@@ -93,7 +122,6 @@ export const competitions: Competition[] = [
     prize: "总奖金 30万元",
     organizer: "华为技术有限公司",
     registrationUrl: "https://example.com/register/huawei2024",
-    status: "closed",
     websiteUrl: "https://example.com/huawei2024",
     participants: "600+",
     featured: false,
@@ -107,7 +135,6 @@ export const competitions: Competition[] = [
     prize: "特等奖 20万元",
     organizer: "中国人工智能学会",
     registrationUrl: "https://example.com/register/innovation2025",
-    status: "ongoing",
     websiteUrl: "https://example.com/innovation2025",
     participants: "400+",
     featured: false,
@@ -121,7 +148,6 @@ export const competitions: Competition[] = [
     prize: "$12,000 USD",
     organizer: "ICCV 2025",
     registrationUrl: "https://example.com/register/iccv2025",
-    status: "upcoming",
     websiteUrl: "https://example.com/iccv2025-multimodal",
     participants: "预计600+",
     featured: false,
@@ -135,7 +161,6 @@ export const competitions: Competition[] = [
     prize: "冠军 8万元",
     organizer: "百度飞桨",
     registrationUrl: "https://aistudio.baidu.com/competition/example",
-    status: "ongoing",
     websiteUrl: "https://aistudio.baidu.com/competition/example",
     participants: "900+",
     featured: false,
@@ -149,14 +174,27 @@ export const competitions: Competition[] = [
     prize: "一等奖 3万元",
     organizer: "中国研究生创新实践系列大赛组委会",
     registrationUrl: "https://example.com/register/graduate2025",
-    status: "upcoming",
     websiteUrl: "https://example.com/graduate2025",
     participants: "预计700+",
     featured: false,
   },
 ];
 
+// 获取带状态的竞赛数据
+export function getCompetitionsWithStatus(): CompetitionWithStatus[] {
+  return competitions
+    .map((competition) => ({
+      ...competition,
+      status: getCompetitionStatus(competition.deadline),
+    }))
+    .sort(
+      (a, b) => new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
+    );
+}
+
 // 过滤出在首页展示的竞赛项目
-export const featuredCompetitions = competitions.filter(
-  (competition) => competition.featured
-);
+export const featuredCompetitions = competitions
+  .filter((competition) => competition.featured)
+  .sort(
+    (a, b) => new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
+  );

@@ -4,27 +4,16 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import CategoryFilter from "../components/CategoryFilter";
 import CompetitionCard from "../components/CompetitionCard";
-import { competitions } from "../data/competitions";
-
-// 竞赛分类
-const categories = [
-  "算法竞赛",
-  "数据竞赛",
-  "创新竞赛",
-  "学术竞赛",
-  "产业竞赛",
-  "国际竞赛",
-  "学生竞赛",
-  "编程竞赛",
-];
+import { categories, getCompetitionsWithStatus } from "../data/competitions";
 
 export default function CompetitionsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  const competitionsWithStatus = getCompetitionsWithStatus();
   const filteredCompetitions =
     selectedCategory === "all"
-      ? competitions
-      : competitions.filter(
+      ? competitionsWithStatus
+      : competitionsWithStatus.filter(
           (competition) => competition.category === selectedCategory
         );
 

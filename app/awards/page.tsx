@@ -4,19 +4,7 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import CategoryFilter from "../components/CategoryFilter";
 import PaperCard from "../components/PaperCard";
-import { awards } from "../data/awards";
-
-// 获奖分类
-const categories = [
-  "机器学习",
-  "深度学习",
-  "计算机视觉",
-  "自然语言处理",
-  "数据科学",
-  "算法竞赛",
-  "编程竞赛",
-  "数学建模",
-];
+import { awards, categories } from "../data/awards";
 
 export default function PapersPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");

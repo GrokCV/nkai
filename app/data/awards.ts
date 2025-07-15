@@ -1,9 +1,21 @@
+// 获奖分类
+export const categories = [
+  "机器学习",
+  "深度学习",
+  "计算机视觉",
+  "自然语言处理",
+  "数据科学",
+  "算法竞赛",
+  "编程竞赛",
+  "数学建模",
+];
+
 // 共享的获奖数据
 export interface Award {
   title: string;
   teamMembers: string;
   year: string;
-  category: string;
+  category: (typeof categories)[number];
   href: string;
   description: string;
   featured: boolean; // 是否在首页展示

@@ -4,18 +4,7 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import CategoryFilter from "../components/CategoryFilter";
 import DatasetCard from "../components/DatasetCard";
-import { solutions } from "../data/solutions";
-
-// 方案分类
-const categories = [
-  "计算机视觉方案",
-  "自然语言处理方案",
-  "推荐系统方案",
-  "数据科学方案",
-  "算法竞赛方案",
-  "机器学习方案",
-  "深度学习方案",
-];
+import { solutions, categories } from "../data/solutions";
 
 export default function DatasetsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");

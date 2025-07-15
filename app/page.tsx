@@ -6,7 +6,10 @@ import CompetitionCard from "./components/CompetitionCard";
 import Link from "next/link";
 import { featuredAwards } from "./data/awards";
 import { featuredSolutions } from "./data/solutions";
-import { featuredCompetitions } from "./data/competitions";
+import {
+  featuredCompetitions,
+  getCompetitionStatus,
+} from "./data/competitions";
 
 export default function Home() {
   return (
@@ -78,7 +81,11 @@ export default function Home() {
         className="bg-gray-50"
       >
         {featuredCompetitions.map((competition, index) => (
-          <CompetitionCard key={index} {...competition} />
+          <CompetitionCard
+            key={index}
+            {...competition}
+            status={getCompetitionStatus(competition.deadline)}
+          />
         ))}
       </ContentSection>
 
