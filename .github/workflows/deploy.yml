@@ -16,6 +16,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            npm i
-            npm run build
-            pm2 restart nkai
+            # fnm
+            FNM_PATH="$HOME/.local/share/fnm"
+            if [ -d "$FNM_PATH" ]; then
+              export PATH="$FNM_PATH:$PATH"
+              eval "`fnm env`"
+            fi
+
+            cd apps/nkai
+            git pull
+            npm i && npm run build && pm2 restart nkai
